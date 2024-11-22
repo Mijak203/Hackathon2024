@@ -6,5 +6,3 @@
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_vfmut")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer"]
