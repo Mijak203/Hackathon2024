@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpmxy5fawa0cu"]
+
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_sy1r1"]
+[ext_resource type="Texture2D" uid="uid://3c3deruxhkxk" path="res://assets/kloc_za.png" id="1_t7qrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5wpc"]
+size = Vector2(14, 14)
+
+[node name="Block" type="CharacterBody2D"]
+position = Vector2(8, 8)
+collision_layer = 8
+script = ExtResource("1_sy1r1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t7qrm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q5wpc")

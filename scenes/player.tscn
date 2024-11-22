@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv6ctmsqwgw0a"]
+
+[ext_resource type="Texture2D" uid="uid://b52iiasosahnb" path="res://assets/Mask Dude/Idle (32x32).png" id="1_21b2d"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_5842g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8q04s"]
+size = Vector2(22, 28)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 10
+script = ExtResource("1_5842g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_21b2d")
+hframes = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_8q04s")
+
+[node name="EdgeDetect" type="RayCast2D" parent="."]
+position = Vector2(-12, 0)
+target_position = Vector2(0, 22)
+collision_mask = 2
+
+[node name="WallDetect" type="RayCast2D" parent="." groups=["player"]]
+position = Vector2(0, 5)
+target_position = Vector2(18, 0)
+collision_mask = 10
