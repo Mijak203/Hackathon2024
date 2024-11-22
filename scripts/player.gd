@@ -5,10 +5,14 @@ const SPEED = 130.0
 const JUMP_VELOCITY_Y = -200
 const JUMP_VELOCITY_X = 500
 const BASE_GRAVITY = 800
-
+const PUSH_FORCE = 80
+const BLOCK_MAX_VELOCITY = 125
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var wall_detect: RayCast2D = $WallDetect
 @onready var edge_detect: RayCast2D = $EdgeDetect
+
+
+
 
 enum state{
 	IDLE,
@@ -24,6 +28,7 @@ var counter = 0
 
 
 func _physics_process(delta: float) -> void:
+	
 	if Global.build_mode == false:
 		phisic()
 		
@@ -51,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 		else:
 			velocity.y += 5
-
+	
 func phisic():
 	input_direction_x = Input.get_axis("go_left", "go_right")
 	
@@ -103,6 +108,13 @@ func rotateing():
 func run(delta):
 	velocity.x = SPEED * input_direction_x
 	velocity.y += BASE_GRAVITY * delta
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collision_block = collision.get_collider()
+		if collision_block.is_in_group("tables") and abs(collision_block.get_linear_velocity().x) < BLOCK_MAX_VELOCITY:
+			collision_block.apply_central_impulse(collision.get_normal() * -PUSH_FORCE)
+			
+			
 	
 	if (input_direction_x == 1 and sprite.flip_h == true): 
 		current_state = state.ROTATE
