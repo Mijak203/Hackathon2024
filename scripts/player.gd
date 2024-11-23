@@ -7,6 +7,7 @@ const JUMP_VELOCITY_X = 500
 const BASE_GRAVITY = 800
 const PUSH_FORCE = 80
 const BLOCK_MAX_VELOCITY = 125
+var is_note_open = false
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var wall_detect: RayCast2D = $WallDetect
 @onready var edge_detect: RayCast2D = $EdgeDetect
@@ -31,9 +32,19 @@ func _physics_process(delta: float) -> void:
 	
 	if Global.build_mode == false:
 		phisic()
+		if is_on_floor():
+			if Global.note_to_open == true and is_note_open == false and Input.is_action_just_pressed("openNote"):
+				Global.showNote = true
+				is_note_open = true
+				Engine.time_scale = 0 
+			elif Global.note_to_open == true and is_note_open == true and Input.is_action_just_pressed("openNote"): 
+				Global.showNote = false
+				is_note_open = false
+				Engine.time_scale = 1
 		
 		match(current_state):
 			state.IDLE:
+				
 				idle(delta)
 				
 			state.ROTATE:
@@ -47,7 +58,8 @@ func _physics_process(delta: float) -> void:
 				
 			state.WALL_JUMP:
 				wall_jump()
-				
+		
+		
 		move_and_slide()
 	else:
 		move_and_slide()

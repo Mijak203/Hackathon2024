@@ -1,26 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://br2bg1kn80nyo"]
+[gd_scene load_steps=8 format=3 uid="uid://br2bg1kn80nyo"]
 
+[ext_resource type="Script" path="res://scenes/test_level.gd" id="1_7qt4i"]
 [ext_resource type="PackedScene" uid="uid://cv6ctmsqwgw0a" path="res://scenes/player.tscn" id="2_3yq32"]
 [ext_resource type="PackedScene" uid="uid://c3ukpgod73wxv" path="res://scenes/block.tscn" id="2_rxjfp"]
+[ext_resource type="PackedScene" uid="uid://i0jhl88bsta8" path="res://scenes/note.tscn" id="3_3suyc"]
+[ext_resource type="Texture2D" uid="uid://0o57yvecngbi" path="res://assets/Gray.png" id="4_cipe3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qnom6"]
 
+[sub_resource type="GDScript" id="GDScript_u8viq"]
+script/source = "extends TextureRect
+
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_7qt4i")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(63, 248)
+position = Vector2(553, 397)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_qnom6")
 
 [node name="Player" parent="." instance=ExtResource("2_3yq32")]
-position = Vector2(34, 231)
+position = Vector2(524, 380)
 collision_mask = 26
 
 [node name="box" parent="." instance=ExtResource("2_rxjfp")]
-position = Vector2(277, 179)
+position = Vector2(767, 328)
 collision_layer = 16
 collision_mask = 3
+
+[node name="Note" parent="." instance=ExtResource("3_3suyc")]
+position = Vector2(618, 371)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 328)
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Camera2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_cipe3")
+script = SubResource("GDScript_u8viq")

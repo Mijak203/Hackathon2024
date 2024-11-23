@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://i0jhl88bsta8"]
+
+[ext_resource type="Texture2D" uid="uid://follsm5sum34" path="res://icon.svg" id="1_jkloe"]
+[ext_resource type="Script" path="res://scripts/note.gd" id="1_savay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dj84e"]
+size = Vector2(256, 126)
+
+[node name="Note" type="Area2D"]
+script = ExtResource("1_savay")
+
+[node name="Note" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_jkloe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.3, 0.3)
+shape = SubResource("RectangleShape2D_dj84e")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
