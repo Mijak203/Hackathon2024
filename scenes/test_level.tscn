@@ -26,23 +26,23 @@ script = ExtResource("1_7qt4i")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(553, 397)
+position = Vector2(504, 436)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_qnom6")
 
-[node name="Player" parent="." instance=ExtResource("2_3yq32")]
-position = Vector2(524, 380)
-collision_mask = 26
-
 [node name="box" parent="." instance=ExtResource("2_rxjfp")]
-position = Vector2(767, 328)
+position = Vector2(718, 367)
 collision_layer = 16
 collision_mask = 3
 
 [node name="Note" parent="." instance=ExtResource("3_3suyc")]
-position = Vector2(618, 371)
+position = Vector2(569, 410)
+
+[node name="Player" parent="." instance=ExtResource("2_3yq32")]
+position = Vector2(475, 419)
+collision_mask = 26
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 328)
